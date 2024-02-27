@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { connect} = require("./database");
+const { connect } = require("./database");
 const { Category } = require("./models/category.model");
 const { User } = require("./models/user.model");
 const { Record } = require("./models/record.model");
@@ -36,7 +36,6 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/sign-up", async (req, res) => {
-
   try {
     const { name, email, password } = req.body;
     const user = await User.findOne({ userEmail: email });
@@ -52,7 +51,7 @@ app.post("/sign-up", async (req, res) => {
       updatedAt: new Date(),
       createdAt: new Date(),
     });
- 
+
     const token = jwt.sign({ email }, "secret-boy");
     res.json({
       token,
@@ -62,6 +61,7 @@ app.post("/sign-up", async (req, res) => {
     console.log(err);
   }
 });
+
 app.post("/category", async (req, res) => {
   const { authorization } = req.headers;
   if (!authorization) {
@@ -91,6 +91,7 @@ app.post("/category", async (req, res) => {
     });
   }
 });
+
 app.get("/category", async (req, res) => {
   const { authorization } = req.headers;
   if (!authorization) {
@@ -112,6 +113,7 @@ app.get("/category", async (req, res) => {
     });
   }
 });
+
 app.post("/records", async (req, res) => {
   const { authorization } = req.headers;
 
@@ -184,6 +186,7 @@ app.get("/records", async (req, res) => {
     });
   }
 });
+
 const port = 3005;
 
 app.listen(port, () => {

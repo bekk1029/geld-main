@@ -78,7 +78,7 @@ export default function Balance() {
             How much cash do you have in your wallet?
           </div>
         </div>
-        <Link href={"/Finish"}>
+        <Link href="/finish">
           <Btn value="Confirm" />
         </Link>
       </div>

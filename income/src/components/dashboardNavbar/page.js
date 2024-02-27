@@ -1,28 +1,51 @@
-import { Vector } from "../../assets/Vector";
-import { AddRecord2 } from "../Addcard2";
-
+"use client";
+import { Context } from "../../app/layout";
 import Link from "next/link";
-import Profile from "../Avatar";
-export const DashboardNavbar = () => {
+import { usePathname } from "next/navigation";
+import { useContext, useState } from "react";
+import { useAuth } from "../../providers/AuthProvider";
+import { Vector } from "../../assets/Vector";
+import Profile from "../../app/profile/page";
+const menus = ["dashboard", "records"];
+
+export const Navbar = () => {
+  const { isOpenRecord, setIsOpenRecord } = useContext(Context);
+  const { signOut } = useAuth();
+  const pathname = usePathname();
+
   return (
-    <div className="w-full px-[120px] py-4 bg-white justify-between items-center inline-flex">
-      <div className="justify-start items-center gap-6 flex">
-        <div className="p-[6.30px] justify-start items-center gap-[11.03px] flex">
-          <Link href="/dashboard">
-            <Vector />
-          </Link>
+    <section className="flex flex-row w-full py-[16px] bg-white">
+      <div className="w-[1200px] h-[40px] m-auto flex flex-row justify-between items-center">
+        <div className="flex flex-row items-center gap-[30px] justify-between ">
+          <Vector />
+          {menus.map((menu, index) => (
+            <Link key={index} href={`/${menu}`}>
+              <p
+                className="text-center text-slate-900 text-base font-normal font-['Roboto'] leading-normal"
+                style={{ fontWeight: pathname.includes(menu) ? "700" : " 500" }}
+              >
+                {menu.charAt(0).toUpperCase() + menu.slice(1)}
+              </p>
+            </Link>
+          ))}
         </div>
-        <div className="text-center text-slate-900 text-base font-semibold font-['Roboto'] leading-normal">
-          <Link href={`/dashboard`}> Dashboard</Link>
+        <div className="flex flex-row items-center justify-between gap-[12px]">
+          <button
+            className="bg-[#0166FF] w-[100px] rounded-[20px] text-white"
+            onClick={() => {
+              setIsOpenRecord(true);
+            }}
+          >
+            + Record
+          </button>
         </div>
-        <div className="text-center text-slate-900 text-base font-normal font-['Roboto'] leading-normal">
-          <Link href="/records">Records</Link>
-        </div>
+        <Profile
+          isOpenRecord={isOpenRecord}
+          handleClose={() => {
+            setIsOpenRecord(false);
+          }}
+        />
       </div>
-      <div className="justify-start items-center gap-6 flex">
-        <AddRecord2 />
-        <Profile />
-      </div>
-    </div>
+    </section>
   );
 };

@@ -1,9 +1,9 @@
-import { Home } from "./home/page";
+import Login from "./login/page";
 
 export default function Page() {
   return (
     <div className="w-screen font-['Roboto'] ">
-      <Home />
+      <Login />
     </div>
   );
 }

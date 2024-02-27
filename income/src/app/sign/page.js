@@ -3,8 +3,18 @@ import { Vector } from "../../assets/Vector";
 import { Name } from "../../assets/Name";
 import Link from "next/link";
 import { Btn } from "../../components/btn";
-import { useRouter } from "next/navigation";
+import { useAuth } from "../../providers/AuthProvider";
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 export default function Sign() {
+  const { signUp } = useAuth();
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className="w-full flex h-screen ">
       <div className="w-1/2 flex justify-center items-center bg-white">
@@ -25,20 +35,54 @@ export default function Sign() {
             <input
               placeholder="Name"
               className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300 justify-start items-center flex"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
             <input
               placeholder="Email"
               className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300 justify-start items-center flex"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
-            <input
-              placeholder="Password"
-              className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300 justify-start items-center flex"
-            />
-            <input
-              placeholder="Re-Password"
-              className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300 justify-start items-center flex"
-            />
-            <Link href={"/currency"}>
+            <div className="w-full relative">
+              <input
+                placeholder="password"
+                label="Нууц үг"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300  justify-start items-center flex"
+              />
+              <div
+                onClick={togglePasswordVisibility}
+                className="ml-2 p-2 rounded-md items-center flex absolute inset-y-0 right-0"
+              >
+                {showPassword ? <FiEye /> : <FiEyeOff />}
+              </div>
+            </div>
+            <div className="w-full relative">
+              <input
+                placeholder="password"
+                label="Нууц үг"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300  justify-start items-center flex"
+              />
+              <div
+                onClick={togglePasswordVisibility}
+                className="ml-2 p-2 rounded-md items-center flex absolute inset-y-0 right-0"
+              >
+                {showPassword ? <FiEye /> : <FiEyeOff />}
+              </div>
+            </div>
+            <Link href="/currency">
               <Btn value="Sign up" />
             </Link>
           </div>
@@ -47,14 +91,11 @@ export default function Sign() {
               Already have account?
             </div>
             <div className="w-[77px] px-3 rounded-[20px] justify-center items-center gap-1 flex">
-              <div
-                className="text-blue-600 text-base font-normal font-['Roboto'] leading-normal"
-                onClick={() => {
-                  router.push("/login");
-                }}
-              >
-                Login
-              </div>
+              <Link href="/login">
+                <div className="text-blue-600 text-base font-normal font-['Roboto'] leading-normal">
+                  Login
+                </div>
+              </Link>
             </div>
           </div>
         </div>

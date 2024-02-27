@@ -73,7 +73,7 @@ export default function Finish() {
             and start tracking
           </div>
         </div>
-        <Link href={"/dashboard"}>
+        <Link href="/dashboard">
           <Btn value="Go to Dashboard" />
         </Link>
       </div>

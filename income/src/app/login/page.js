@@ -1,15 +1,17 @@
 "use client";
 import { Vector } from "../../assets/Vector";
 import { Name } from "../../assets/Name";
-import Link from "next/link";
 import { Btn } from "../../components/btn";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import React, { useState } from "react";
+// import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import {} from "@mui/material";
-import { Input } from "postcss";
+import Link from "next/link";
+import { useAuth } from "../../providers/AuthProvider";
+import { useState } from "react";
+import { FiEye } from "react-icons/fi";
+import { FiEyeOff } from "react-icons/fi";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
@@ -25,9 +27,17 @@ export default function Login() {
     onSubmit: (values) => {
       console.log(values);
       router.push("/dashboard");
+      setEmail(e.target.value);
+      setPassword(e.target.value);
     },
   });
   const router = useRouter();
+
+  const { signIn } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="w-full flex h-screen ">
@@ -55,19 +65,27 @@ export default function Login() {
               onBlur={formik.handleBlur}
               className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300   justify-start items-center flex"
             />
-
-            <input
-              placeholder="password"
-              label="Нууц үг"
-              name="password"
-              type="password"
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300  justify-start items-center flex"
-            />
+            <div className="w-full relative">
+              <input
+                placeholder="password"
+                label="Нууц үг"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300  justify-start items-center flex"
+              />
+              <div
+                onClick={togglePasswordVisibility}
+                className="ml-2 p-2 rounded-md items-center flex absolute inset-y-0 right-0"
+              >
+                {showPassword ? <FiEye /> : <FiEyeOff />}
+              </div>
+            </div>
             <Btn
               onClick={() => {
+                signIn(email, password);
                 formik.handleSubmit();
               }}
               value="Log in"
@@ -75,17 +93,14 @@ export default function Login() {
           </form>
           <div className="justify-start  flex">
             <div className="text-slate-900 text-base font-normal font-['Roboto'] leading-normal">
-              Don’t have account?
+              Don&apos;t have account?
             </div>
             <div className="w-[77px] px-3 rounded-[20px] justify-center items-center gap-1 flex">
-              <div
-                className="text-blue-600 text-base font-normal font-['Roboto'] leading-normal"
-                onClick={() => {
-                  router.push("/sign");
-                }}
-              >
-                Sign up
-              </div>
+              <Link href="/sign">
+                <div className="text-blue-600 text-base font-normal font-['Roboto'] leading-normal">
+                  Sign up
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -94,51 +109,3 @@ export default function Login() {
     </div>
   );
 }
-
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
-
-// const validationSchema = yup.object({
-//   email: yup.string().email().required(),
-//   password: yup.string().min(8).max(32).required(),
-// });
-
-// const App = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//     reset,
-//   } = useForm({
-//     resolver: yupResolver(validationSchema),
-//   });
-//   const onSubmitHandler = (data) => {
-//     console.log({ data });
-//     reset();
-//   };
-//   return (
-//     <form onSubmit={handleSubmit(onSubmitHandler)}>
-//       <h2>Lets sign you in.</h2>
-//       <br />
-
-//       <input {...register("email")} placeholder="email" type="email" required />
-//       <p>{errors.email?.message}</p>
-//       <br />
-
-//       <input
-//         {...register("password")}
-//         placeholder="password"
-//         type="password"
-//         required
-//       />
-//       <p>{errors.password?.message}</p>
-//       <br />
-
-//       <button type="submit">Sign in</button>
-//     </form>
-//   );
-// };
-
-// export default App;

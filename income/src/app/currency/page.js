@@ -86,7 +86,7 @@ export default function Currency() {
             transaction in other currencies will be calculated based on this one{" "}
           </div>
         </div>
-        <Link href={"/balance"}>
+        <Link href="/balance">
           <Btn value="Confirm" />
         </Link>
       </div>
