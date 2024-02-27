@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../providers/AuthProvider";
 
 function Profile() {
-  const { signOut } = useAuth();
+  // const { signOut } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);

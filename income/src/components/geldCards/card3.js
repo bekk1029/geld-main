@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Down } from "../../assets/Down";
 
 export default function Card3() {
-  const { recordData, isReadyRecord } = useAuth();
+  // const { recordData, isReadyRecord } = useAuth();
   return (
     <div className="w-full  bg-white rounded-xl flex-col justify-start items-start flex">
       <div className="self-stretch px-6 py-4 border-b border-slate-200 justify-start items-center gap-2 flex">

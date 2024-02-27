@@ -2,7 +2,7 @@ import { useAuth } from "../../providers/AuthProvider";
 import * as icons from "react-icons/gr";
 
 export default function LastRecords() {
-  const { isReadyRecord, recordData } = useAuth();
+  // const { isReadyRecord, recordData } = useAuth();
   return (
     <div className="w-full bg-white rounded-xl flex-col justify-start items-start flex">
       <div className="self-stretch px-6 py-4 border-b border-slate-200 justify-start items-center gap-2 flex">

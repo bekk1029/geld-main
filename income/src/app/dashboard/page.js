@@ -5,14 +5,14 @@ import Card2 from "../../components/geldCards/card2";
 import Card3 from "../../components/geldCards/card3";
 import Expense1 from "../../components/expense/expense1";
 import Expense2 from "../../components/expense/expense2";
-import { useAuth } from "../../providers/AuthProvider";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+// import { useAuth } from "../../providers/AuthProvider";
+// import { useRouter } from "next/navigation";
+// import { useEffect } from "react";
 import LastRecords from "../../components/expense/lastRecords";
 
 export default function Dashboard() {
-  const router = useRouter();
-  const { isLoggedIn } = useAuth();
+  // const router = useRouter();
+  // const { isLoggedIn } = useAuth();
 
   // useEffect(() => {
   //   if (!isLoggedIn) router.push("/");

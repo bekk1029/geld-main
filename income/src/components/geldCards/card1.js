@@ -5,7 +5,7 @@ import { Shape } from "../../assets/Shape";
 import { Wi } from "../../assets/Wi";
 
 export default function Card1() {
-  const { isReadyRecord, recordData } = useAuth();
+  // const { isReadyRecord, recordData } = useAuth();
   return (
     <div className="w-full relative bg-blue-600 rounded-[18px] overflow-hidden">
       <div></div>

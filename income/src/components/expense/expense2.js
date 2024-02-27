@@ -30,7 +30,7 @@ export const data = {
 };
 
 export default function Expense2() {
-  const { recordData, isReadyRecord } = useAuth();
+  // const { recordData, isReadyRecord } = useAuth();
   return (
     <div className="w-full bg-white rounded-xl flex-col justify-start items-start flex">
       <div className="self-stretch px-6 py-4 border-b border-slate-200 justify-between items-center flex">

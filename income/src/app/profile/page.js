@@ -6,7 +6,7 @@ import { useState } from "react";
 import React from "react";
 
 export default function Profile() {
-  const { signOut } = useAuth();
+  // const { signOut } = useAuth();
   const [activeTab, setactiveTab] = useState(0);
   return (
     <div class="w-[1440px] h-[1148px] flex justify-center items-center m-auto relative bg-gray-100">
@@ -72,7 +72,7 @@ export default function Profile() {
           </Link>
 
           <div
-            onClick={signOut}
+            // onClick={signOut}
             className="mt-20 cursor-pointer bg-red-500 p-2 text-white rounded-lg"
           >
             Sign Out

@@ -10,12 +10,12 @@ const menus = ["dashboard", "records"];
 
 export const Navbar = () => {
   const { isOpenRecord, setIsOpenRecord } = useContext(Context);
-  const { signOut } = useAuth();
+  // const { signOut } = useAuth();
   const pathname = usePathname();
 
   return (
     <section className="flex flex-row w-full py-[16px] bg-white">
-      <div className="w-[1200px] h-[40px] m-auto flex flex-row justify-between items-center">
+      <div className="w-[1200px] h-[40px] m-auto flex flex-row justify-between items-centesr">
         <div className="flex flex-row items-center gap-[30px] justify-between ">
           <Vector />
           {menus.map((menu, index) => (

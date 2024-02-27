@@ -7,7 +7,7 @@ import { useAuth } from "../../providers/AuthProvider";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 export default function Sign() {
-  const { signUp } = useAuth();
+  // const { signUp } = useAuth();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");

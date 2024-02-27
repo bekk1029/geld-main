@@ -1,6 +1,6 @@
 "use client";
 
-import { api } from "../app/common";
+import { api } from "../components/common";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -20,38 +20,8 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
   const signIn = async (email, password) => {
-    setIsLoading(true);
-
     try {
       const { data } = await api.post("/login", {
-        email,
-        password,
-      });
-
-      const { token } = data;
-
-      localStorage.setItem("token", token);
-
-      // setIsLoggedIn(true);
-
-      // setRefresh(refresh + 1);
-
-      router.push("/dashboard");
-      // showOn();
-    } catch (error) {
-      // toast.error(error.response.data.message);
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const signUp = async (name, email, password) => {
-    setIsLoading(true);
-
-    try {
-      const { data } = await api.post("/sign", {
-        name,
         email,
         password,
       });
@@ -64,7 +34,33 @@ export const AuthProvider = ({ children }) => {
 
       setRefresh(refresh + 1);
 
-      router.push("/dashboard");
+      // router.push("/dashboard");
+      // showOn();
+    } catch (error) {
+      // toast.error(error.response.data.message);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const signUp = async (name, email, password) => {
+    try {
+      const { data } = await api.post("/sign", {
+        name,
+        email,
+        password,
+      });
+
+      const { token } = data;
+
+      localStorage.setItem("token", token);
+
+      // setIsLoggedIn(true);
+
+      // setRefresh(refresh + 1);
+
+      // router.push("/dashboard");
       // showOn();
     } catch (error) {
       // toast.error(error.response.data.message);
@@ -191,24 +187,24 @@ export const AuthProvider = ({ children }) => {
     setRefresh(refresh + 1);
   };
 
-  useEffect(() => {
-    setIsReady(false);
+  // useEffect(() => {
+  //   setIsReady(false);
 
-    const token = localStorage.getItem("token");
+  //   const token = localStorage.getItem("token");
 
-    if (token) {
-      setIsLoggedIn(true);
-    }
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //   }
 
-    setIsReady(true);
+  //   setIsReady(true);
 
-    // showOn();
-  }, []);
+  //   // showOn();
+  // }, []);
 
-  useEffect(() => {
-    showCategory();
-    showRecords();
-  }, [refresh]);
+  // useEffect(() => {
+  //   showCategory();
+  //   showRecords();
+  // }, [refresh]);
 
   return (
     <AuthContext.Provider
@@ -229,7 +225,7 @@ export const AuthProvider = ({ children }) => {
         isLoading,
       }}
     >
-      {isReady && children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -31,7 +31,9 @@ export default function RootLayout({ children }) {
             setSelectedIcon,
           }}
         >
-          <AuthProvider>{children}</AuthProvider>
+          {/* <AuthProvider> */}
+          {children}
+          {/* </AuthProvider> */}
         </Context.Provider>
       </body>
     </html>

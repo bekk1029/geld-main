@@ -33,7 +33,7 @@ export default function Login() {
   });
   const router = useRouter();
 
-  const { signIn } = useAuth();
+  // const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
