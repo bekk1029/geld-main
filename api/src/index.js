@@ -13,19 +13,13 @@ connect();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/login", async (req, res) => {
+app.post("/sign-in", async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ userEmail: email });
+  const user = await User.findOne({ userEmail: email, password: password });
 
   if (!user) {
     return res.status(401).json({
-      message: "Unauthorized",
-    });
-  }
-
-  if (user.password !== password) {
-    return res.status(401).json({
-      message: "Unauthorized",
+      message: "hereglegch alga esvel password buruu baina",
     });
   }
 
@@ -35,7 +29,7 @@ app.post("/login", async (req, res) => {
   });
 });
 
-app.post("/sign-up", async (req, res) => {
+app.post("/signUp", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const user = await User.findOne({ userEmail: email });
@@ -48,14 +42,10 @@ app.post("/sign-up", async (req, res) => {
       name: name,
       userEmail: email,
       password: password,
-      updatedAt: new Date(),
-      createdAt: new Date(),
     });
 
-    const token = jwt.sign({ email }, "secret-boy");
     res.json({
-      token,
-      message: "user already exists",
+      message: "user created successfully",
     });
   } catch (err) {
     console.log(err);

@@ -2,6 +2,8 @@
 
 import { api } from "../components/common";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -20,24 +22,35 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
   const signIn = async (email, password) => {
+    setIsLoading(true);
     try {
-      const { data } = await api.post("/login", {
-        email,
-        password,
-      });
-
+      const data = await api.post("/sign-in", { email, password });
       const { token } = data;
-
       localStorage.setItem("token", token);
 
-      setIsLoggedIn(true);
-
-      setRefresh(refresh + 1);
-
+      toast.success(data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setIsLoading(true);
       router.push("/dashboard");
     } catch (error) {
-      // toast.error(error.response.data.message);
-      console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -45,15 +58,15 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (name, email, password) => {
     try {
-      const { data } = await api.post("/sign", {
+      const { data } = await api.post("/signUp", {
         name,
         email,
         password,
       });
 
-      const { token } = data;
+      // const { token } = data;
 
-      localStorage.setItem("token", token);
+      // localStorage.setItem("token", token);
 
       setIsLoggedIn(true);
 
@@ -75,119 +88,119 @@ export const AuthProvider = ({ children }) => {
 
     router.push("/");
   };
-  const addCategory = async (categoryName, IconColor, selectedIcon) => {
-    try {
-      const token = localStorage.getItem("token");
-      const { data } = await api.post(
-        "/category",
-        {
-          categoryName,
-          IconColor,
-          selectedIcon,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setRefresh(refresh + 1);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const addRecord_ = async (
-    amount,
-    date,
-    isExpense,
-    selectedCategory,
-    time,
-    IconColor,
-    selectedIcon
-  ) => {
-    try {
-      const token = localStorage.getItem("token");
-      const { data } = await api.post(
-        "/records",
-        {
-          amount,
-          date,
-          isExpense,
-          selectedCategory,
-          time,
-          IconColor,
-          selectedIcon,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setRefresh(refresh + 1);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const showCategory = async () => {
-    setIsReadyCategory(false);
-    try {
-      const token = localStorage.getItem("token");
-      const { data } = await api.get("/category", {
-        headers: {
-          Authorization: token,
-        },
-      });
-      const { userCategory } = data;
+  // const addCategory = async (categoryName, IconColor, selectedIcon) => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const { data } = await api.post(
+  //       "/category",
+  //       {
+  //         categoryName,
+  //         IconColor,
+  //         selectedIcon,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: token,
+  //         },
+  //       }
+  //     );
+  //     setRefresh(refresh + 1);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  // const addRecord_ = async (
+  //   amount,
+  //   date,
+  //   isExpense,
+  //   selectedCategory,
+  //   time,
+  //   IconColor,
+  //   selectedIcon
+  // ) => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const { data } = await api.post(
+  //       "/records",
+  //       {
+  //         amount,
+  //         date,
+  //         isExpense,
+  //         selectedCategory,
+  //         time,
+  //         IconColor,
+  //         selectedIcon,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: token,
+  //         },
+  //       }
+  //     );
+  //     setRefresh(refresh + 1);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  // const showCategory = async () => {
+  //   setIsReadyCategory(false);
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const { data } = await api.get("/category", {
+  //       headers: {
+  //         Authorization: token,
+  //       },
+  //     });
+  //     const { userCategory } = data;
 
-      setCategoryData(userCategory.reverse());
-      setIsReadyCategory(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const showRecords = async () => {
-    setIsReadyRecord(false);
-    try {
-      const token = localStorage.getItem("token");
-      const { data } = await api.get("/records", {
-        headers: {
-          Authorization: token,
-        },
-        params: {
-          days: days,
-        },
-      });
-      const { records } = data;
-      console.log(records);
+  //     setCategoryData(userCategory.reverse());
+  //     setIsReadyCategory(true);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  // const showRecords = async () => {
+  //   setIsReadyRecord(false);
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const { data } = await api.get("/records", {
+  //       headers: {
+  //         Authorization: token,
+  //       },
+  //       params: {
+  //         days: days,
+  //       },
+  //     });
+  //     const { records } = data;
+  //     console.log(records);
 
-      setRecordData(records.reverse());
-      setIsReadyRecord(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const addDays = () => {
-    if (days == 7) {
-      setDays(14);
-    }
-    if (days == 14) {
-      setDays(30);
-    }
-    if (days == 30) {
-      setDays(60);
-    }
-    if (days == 60) {
-      setDays(90);
-    }
-    if (days == 90) {
-      setDays(7);
-    }
-    setRefresh(refresh + 1);
-  };
+  //     setRecordData(records.reverse());
+  //     setIsReadyRecord(true);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  // const addDays = () => {
+  //   if (days == 7) {
+  //     setDays(14);
+  //   }
+  //   if (days == 14) {
+  //     setDays(30);
+  //   }
+  //   if (days == 30) {
+  //     setDays(60);
+  //   }
+  //   if (days == 60) {
+  //     setDays(90);
+  //   }
+  //   if (days == 90) {
+  //     setDays(7);
+  //   }
+  //   setRefresh(refresh + 1);
+  // };
 
   useEffect(() => {
-    setIsReady(false);
+    // setIsReady(false);
 
     const token = localStorage.getItem("token");
 
@@ -195,15 +208,15 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
     }
 
-    setIsReady(true);
+    // setIsReady(true);
 
     // showOn();
   }, []);
 
-  useEffect(() => {
-    showCategory();
-    showRecords();
-  }, [refresh]);
+  // useEffect(() => {
+  //   showCategory();
+  //   showRecords();
+  // }, [refresh]);
 
   return (
     <AuthContext.Provider
@@ -211,15 +224,7 @@ export const AuthProvider = ({ children }) => {
         signIn,
         signUp,
         signOut,
-        showRecords,
-        addCategory,
-        addRecord_,
-        addDays,
-        days,
-        recordData,
-        isReadyRecord,
-        isReadyCategory,
-        categoryData,
+
         isLoggedIn,
         isLoading,
       }}

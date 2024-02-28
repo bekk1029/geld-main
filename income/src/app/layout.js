@@ -1,7 +1,7 @@
 "use client";
 import { Inter } from "next/font/google";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import { createContext, useState } from "react";
 import { AuthProvider } from "../providers/AuthProvider";
@@ -31,6 +31,7 @@ export default function RootLayout({ children }) {
           }}
         >
           <AuthProvider>{children}</AuthProvider>
+          <ToastContainer />
         </Context.Provider>
       </body>
     </html>

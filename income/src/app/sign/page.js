@@ -11,6 +11,7 @@ export default function Sign() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [rePassword, setRePassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -35,15 +36,17 @@ export default function Sign() {
             <input
               placeholder="Name"
               className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300 justify-start items-center flex"
+              value={name}
               onChange={(e) => {
                 setName(e.target.value);
               }}
             />
             <input
               placeholder="Email"
+              value={email}
               className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300 justify-start items-center flex"
               onChange={(e) => {
-                setName(e.target.value);
+                setEmail(e.target.value);
               }}
             />
             <div className="w-full relative">
@@ -51,9 +54,10 @@ export default function Sign() {
                 placeholder="password"
                 label="Нууц үг"
                 name="password"
+                value={password}
                 type={showPassword ? "text" : "password"}
                 onChange={(e) => {
-                  setName(e.target.value);
+                  setPassword(e.target.value);
                 }}
                 className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300  justify-start items-center flex"
               />
@@ -70,8 +74,9 @@ export default function Sign() {
                 label="Нууц үг"
                 name="password"
                 type={showPassword ? "text" : "password"}
+                value={rePassword}
                 onChange={(e) => {
-                  setName(e.target.value);
+                  setPassword(e.target.value);
                 }}
                 className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300  justify-start items-center flex"
               />
@@ -82,9 +87,14 @@ export default function Sign() {
                 {showPassword ? <FiEye /> : <FiEyeOff />}
               </div>
             </div>
-            <Link href="/currency">
+            <div
+              onClick={() => {
+                // e.preventDefualt();
+                signUp(email, password, name);
+              }}
+            >
               <Btn value="Sign up" />
-            </Link>
+            </div>
           </div>
           <div className="justify-start items-baseline inline-flex">
             <div className="text-slate-900 text-base font-normal font-['Roboto'] leading-normal">

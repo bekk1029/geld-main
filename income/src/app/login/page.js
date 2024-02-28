@@ -19,21 +19,15 @@ const validationSchema = yup.object({
 });
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { signIn } = useAuth();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      router.push("/dashboard");
-      setEmail(e.target.value);
-      setPassword(e.target.value);
+      signIn({ email: values.email, password: values.password });
     },
   });
-  const router = useRouter();
 
-  const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -83,15 +77,14 @@ export default function Login() {
                 {showPassword ? <FiEye /> : <FiEyeOff />}
               </div>
             </div>
-            <Link href="/dashboard">
-              <Btn
-                onClick={() => {
-                  signIn(email, password);
-                  formik.handleSubmit();
-                }}
-                value="Log in"
-              />
-            </Link>
+            <div
+              onClick={() => {
+                formik.handleSubmit();
+                alert("alert");
+              }}
+            >
+              <Btn value="Log in" />
+            </div>
           </form>
           <div className="justify-start  flex">
             <div className="text-slate-900 text-base font-normal font-['Roboto'] leading-normal">

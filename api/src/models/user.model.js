@@ -6,12 +6,12 @@
 //         required: true
 //     },
 //     email: {
-//         type: String, 
-//         required: true, 
+//         type: String,
+//         required: true,
 //         unique: true
 //     },
-//     password: { 
-//         type: String, 
+//     password: {
+//         type: String,
 //         required: true
 //     },
 //  });
@@ -24,8 +24,6 @@ const User = mongoose.model("User", {
   name: String,
   userEmail: String,
   password: String,
-  updatedAt: Date,
-  createdAt: Date,
 });
 
 module.exports = {
