@@ -7,7 +7,6 @@ export default function Loading() {
         <div className="self-stretch flex-col justify-start items-center gap-12 inline-flex">
           <div className="p-[10.08px] justify-start items-center gap-[17.64px] inline-flex">
             <Vector />
-            <Name />
           </div>
           <div className="flex-col justify-start items-center gap-4 flex">
             <div className="w-8 h-8 justify-start items-start inline-flex">
