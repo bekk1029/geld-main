@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import { createContext, useState } from "react";
 import { AuthProvider } from "../providers/AuthProvider";
-import Navbar from "../components/dashboardNavbar/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,9 +30,7 @@ export default function RootLayout({ children }) {
             setSelectedIcon,
           }}
         >
-          {/* <AuthProvider> */}
-          {children}
-          {/* </AuthProvider> */}
+          <AuthProvider>{children}</AuthProvider>
         </Context.Provider>
       </body>
     </html>

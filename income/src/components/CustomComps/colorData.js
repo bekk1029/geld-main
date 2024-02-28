@@ -1,10 +1,23 @@
-import { useContext } from "react";
-import * as icons from "react-icons/gr";
-import { Context } from "../../app/layout";
-
-export default function SingleIcon(props) {
-  const { IconColor } = useContext(Context);
-  const Icon = icons[props.icon_];
-
-  return <Icon size={18} color={IconColor} />;
-}
+export const colorData = [
+  {
+    color: "#0166FF",
+  },
+  {
+    color: "#01B3FF",
+  },
+  {
+    color: "#41CC00",
+  },
+  {
+    color: "#F9D100",
+  },
+  {
+    color: "#FF0000",
+  },
+  {
+    color: "#FFC0CB",
+  },
+  // {
+  //   color: "#FF0101",
+  // },
+];

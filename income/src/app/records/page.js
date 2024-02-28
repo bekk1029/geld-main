@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "../../components/dashboardNavbar/page";
+import { Navbar } from "../../components/dashboardNavbar/page";
 import AddRecord from "../../components/add_record/addRecord";
 import RecordsSideBar from "../../components/Records/record";
 import RightRecords from "../../components/Records/right/main";
@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 export const Context_ = createContext();
 
 export default function Records() {
-  // const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
   const router = useRouter();
   const { isOpenRecord, isOpenCategory } = useContext(Context);
   const [search, setSearch] = useState("");

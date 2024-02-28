@@ -34,8 +34,7 @@ export const AuthProvider = ({ children }) => {
 
       setRefresh(refresh + 1);
 
-      // router.push("/dashboard");
-      // showOn();
+      router.push("/dashboard");
     } catch (error) {
       // toast.error(error.response.data.message);
       console.log(error);
@@ -56,11 +55,11 @@ export const AuthProvider = ({ children }) => {
 
       localStorage.setItem("token", token);
 
-      // setIsLoggedIn(true);
+      setIsLoggedIn(true);
 
       // setRefresh(refresh + 1);
 
-      // router.push("/dashboard");
+      router.push("/dashboard");
       // showOn();
     } catch (error) {
       // toast.error(error.response.data.message);
@@ -187,24 +186,24 @@ export const AuthProvider = ({ children }) => {
     setRefresh(refresh + 1);
   };
 
-  // useEffect(() => {
-  //   setIsReady(false);
+  useEffect(() => {
+    setIsReady(false);
 
-  //   const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-  //   if (token) {
-  //     setIsLoggedIn(true);
-  //   }
+    if (token) {
+      setIsLoggedIn(true);
+    }
 
-  //   setIsReady(true);
+    setIsReady(true);
 
-  //   // showOn();
-  // }, []);
+    // showOn();
+  }, []);
 
-  // useEffect(() => {
-  //   showCategory();
-  //   showRecords();
-  // }, [refresh]);
+  useEffect(() => {
+    showCategory();
+    showRecords();
+  }, [refresh]);
 
   return (
     <AuthContext.Provider

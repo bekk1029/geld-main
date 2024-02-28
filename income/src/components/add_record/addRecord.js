@@ -26,16 +26,15 @@ export default function AddRecord() {
       <div className="w-[792px] h-[512px] bg-white  rounded-[12px] flex-col flex">
         <header className="w-full h-[68px] flex items-center px-[20px] justify-between">
           <h1 className="text-[20px] font-[600]">Add Record</h1>
-          <Image
+          <h1
             className="cursor-pointer"
-            src="/esc.svg"
-            width={24}
-            alt="Picture of the author"
             height={24}
             onClick={() => {
               setIsOpenRecord(false);
             }}
-          ></Image>
+          >
+            X
+          </h1>
         </header>
         <main className="flex w-full h-full flex-row gap-[48px] px-[24px] py-[20px]">
           <div className="w-[396px] h-full flex flex-col gap-[20px]">

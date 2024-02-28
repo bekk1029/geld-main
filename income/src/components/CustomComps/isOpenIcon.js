@@ -3,7 +3,7 @@ import { ColorData } from "./colorData";
 import { iconData } from "./openIcon";
 import SingleIcon from "./icon";
 import { Context } from "../../app/layout";
-export default function IsIconsOpen(props) {
+export function IsIconsOpen(props) {
   const { setIconColor, setSelectedIcon } = useContext(Context);
   return (
     <section className="w-[312px] h-[336px] rounded-lg px-6 bg-slate-400 absolute top-20 left-0">

@@ -17,7 +17,7 @@ export default function ShowCategoryOfAddRecord(props) {
           setIsOpenCategory(true);
         }}
       >
-        <img src="/PlusCircle.svg" className="w-6 h-6"></img>
+        <p className="w-6 h-6">+</p>
         <p>Add Category</p>
       </span>
       <hr></hr>
