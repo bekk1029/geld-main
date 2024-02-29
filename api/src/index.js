@@ -14,22 +14,6 @@ connect();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/sign-in", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ userEmail: email, password: password });
-
-  if (!user) {
-    return res.status(401).json({
-      message: "hereglegch alga esvel password buruu baina",
-    });
-  }
-
-  const token = jwt.sign({ email }, "secret-boy");
-  res.json({
-    token,
-  });
-});
-
 app.post("/signUp", async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -39,69 +23,90 @@ app.post("/signUp", async (req, res) => {
         message: "user already exists",
       });
     }
-    user = await User.create({
+    const newUser = await User.create({
       name,
       email,
       password,
     });
 
-    return res.json({ user, message: "user created successfully" });
+    return res.json({ newUser, message: "user created successfully" });
   } catch (err) {
     console.log(err);
   }
 });
 
-// app.post("/category", async (req, res) => {
-//   const { authorization } = req.headers;
-//   if (!authorization) {
-//     return res.status(401).json({
-//       message: "error",
-//     });
-//   }
-//   try {
-//     const verify = jwt.verify(authorization, "secret-boy");
-//     const { email } = verify;
-//     const { categoryName, IconColor, selectedIcon } = req.body;
+app.post("/signIn", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email: email, password: password });
 
-//     await Category.create({
-//       categoryName: categoryName,
-//       IconColor: IconColor,
-//       selectedIcon: selectedIcon,
-//       userEmail: email,
-//       Date: new Date(),
-//     });
+    if (!user) {
+      return res.status(401).json({
+        message: "hereglegch alga esvel password buruu baina",
+      });
+    }
 
-//     res.json({
-//       message: "fine",
-//     });
-//   } catch (err) {
-//     return res.status(401).json({
-//       message: "Unauthorized",
-//     });
-//   }
-// });
+    const token = jwt.sign({ email }, "secret-key");
+    res.json({
+      token,
+      message: "fine",
+    });
+  } catch (error) {
+    res.json(error);
+  }
+});
 
-// app.get("/category", async (req, res) => {
-//   const { authorization } = req.headers;
-//   if (!authorization) {
-//     return res.status(401).json({
-//       message: "error",
-//     });
-//   }
-//   try {
-//     const verify = jwt.verify(authorization, "secret-boy");
-//     const { email } = verify;
-//     const userCategory = await Category.find({ userEmail: email });
+app.post("/category", async (req, res) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({
+      message: "error",
+    });
+  }
+  try {
+    const verify = jwt.verify(authorization, "secret-boy");
+    const { email } = verify;
+    const { categoryName, IconColor, selectedIcon } = req.body;
 
-//     res.json({
-//       userCategory,
-//     });
-//   } catch (err) {
-//     res.status(401).json({
-//       message: "error1",
-//     });
-//   }
-// });
+    await Category.create({
+      categoryName: categoryName,
+      IconColor: IconColor,
+      selectedIcon: selectedIcon,
+      userEmail: email,
+      Date: new Date(),
+    });
+
+    res.json({
+      message: "fine",
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+});
+
+app.get("/category", async (req, res) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({
+      message: "error",
+    });
+  }
+  try {
+    const verify = jwt.verify(authorization, "secret-boy");
+    const { email } = verify;
+    const userCategory = await Category.find({ userEmail: email });
+
+    res.json({
+      userCategory,
+    });
+  } catch (err) {
+    res.status(401).json({
+      message: "error1",
+    });
+  }
+});
 
 // app.post("/records", async (req, res) => {
 //   const { authorization } = req.headers;

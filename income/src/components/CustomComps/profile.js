@@ -27,7 +27,7 @@ function Profile() {
       />
       {showDropdown && (
         <div className="absolute bg-white w-36 rounded-md z-20 p-2 border-2 right-0">
-          <Link href="/profilee">
+          <Link href="/profile">
             <button className="">View Profile</button>
           </Link>
           <button onClick={signOut}>Sign Out</button>

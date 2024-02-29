@@ -34,13 +34,8 @@ export default function CategorySideBar() {
               {category.categoryName}
             </span>
           ))}
-        <div className="flex flex-row gap-[8px] ">
-          <Image
-            src="/add_icon.svg"
-            alt="Picture of the author"
-            width={20}
-            height={20}
-          ></Image>
+        <div className="flex flex-row gap-[8px] justify-start items-center cursor-pointer">
+          <p width={50}>+</p>
           <p
             onClick={() => {
               setIsOpenCategory(true);

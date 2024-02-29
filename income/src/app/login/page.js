@@ -15,7 +15,7 @@ import { FiEyeOff } from "react-icons/fi";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+  password: yup.string().required(),
 });
 
 export default function Login() {
@@ -80,7 +80,6 @@ export default function Login() {
             <div
               onClick={() => {
                 formik.handleSubmit();
-                alert("alert");
               }}
             >
               <Btn value="Log in" />

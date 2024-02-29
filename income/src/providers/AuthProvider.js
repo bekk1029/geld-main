@@ -24,33 +24,16 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (email, password) => {
     setIsLoading(true);
     try {
-      const data = await api.post("/sign-in", { email, password });
+      const { data } = await api.post("/signIn", { email, password });
       const { token } = data;
       localStorage.setItem("token", token);
 
-      toast.success(data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      console.log(data);
+      toast.success(data.message);
       setIsLoading(true);
       router.push("/dashboard");
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }
@@ -64,28 +47,13 @@ export const AuthProvider = ({ children }) => {
         password,
       });
 
-      toast.success(data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      router.push("/dashboard");
+      console.log("DATA", data);
+
+      toast.success(data.message);
+      router.push("/currency");
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      console.log("ERROR", error);
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }
@@ -97,98 +65,101 @@ export const AuthProvider = ({ children }) => {
 
     router.push("/");
   };
-  // const addCategory = async (categoryName, IconColor, selectedIcon) => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const { data } = await api.post(
-  //       "/category",
-  //       {
-  //         categoryName,
-  //         IconColor,
-  //         selectedIcon,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: token,
-  //         },
-  //       }
-  //     );
-  //     setRefresh(refresh + 1);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  // const addRecord_ = async (
-  //   amount,
-  //   date,
-  //   isExpense,
-  //   selectedCategory,
-  //   time,
-  //   IconColor,
-  //   selectedIcon
-  // ) => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const { data } = await api.post(
-  //       "/records",
-  //       {
-  //         amount,
-  //         date,
-  //         isExpense,
-  //         selectedCategory,
-  //         time,
-  //         IconColor,
-  //         selectedIcon,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: token,
-  //         },
-  //       }
-  //     );
-  //     setRefresh(refresh + 1);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  // const showCategory = async () => {
-  //   setIsReadyCategory(false);
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const { data } = await api.get("/category", {
-  //       headers: {
-  //         Authorization: token,
-  //       },
-  //     });
-  //     const { userCategory } = data;
 
-  //     setCategoryData(userCategory.reverse());
-  //     setIsReadyCategory(true);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  // const showRecords = async () => {
-  //   setIsReadyRecord(false);
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const { data } = await api.get("/records", {
-  //       headers: {
-  //         Authorization: token,
-  //       },
-  //       params: {
-  //         days: days,
-  //       },
-  //     });
-  //     const { records } = data;
-  //     console.log(records);
+  const addCategory = async (categoryName, IconColor, selectedIcon) => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await api.post(
+        "/category",
+        {
+          categoryName,
+          IconColor,
+          selectedIcon,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setRefresh(refresh + 1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const addRecord_ = async (
+    amount,
+    date,
+    isExpense,
+    selectedCategory,
+    time,
+    IconColor,
+    selectedIcon
+  ) => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await api.post(
+        "/records",
+        {
+          amount,
+          date,
+          isExpense,
+          selectedCategory,
+          time,
+          IconColor,
+          selectedIcon,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setRefresh(refresh + 1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  //     setRecordData(records.reverse());
-  //     setIsReadyRecord(true);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const showCategory = async () => {
+    setIsReadyCategory(false);
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await api.get("/category", {
+        headers: {
+          Authorization: token,
+        },
+      });
+      const { userCategory } = data;
+
+      setCategoryData(userCategory.reverse());
+      setIsReadyCategory(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const showRecords = async () => {
+    setIsReadyRecord(false);
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await api.get("/records", {
+        headers: {
+          Authorization: token,
+        },
+        params: {
+          days: days,
+        },
+      });
+      const { records } = data;
+      console.log(records);
+
+      setRecordData(records.reverse());
+      setIsReadyRecord(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // const addDays = () => {
   //   if (days == 7) {
   //     setDays(14);
@@ -209,7 +180,7 @@ export const AuthProvider = ({ children }) => {
   // };
 
   useEffect(() => {
-    // setIsReady(false);
+    setIsReady(false);
 
     const token = localStorage.getItem("token");
 
@@ -222,10 +193,10 @@ export const AuthProvider = ({ children }) => {
     // showOn();
   }, []);
 
-  // useEffect(() => {
-  //   showCategory();
-  //   showRecords();
-  // }, [refresh]);
+  useEffect(() => {
+    showCategory();
+    // showRecords();
+  }, [refresh]);
 
   return (
     <AuthContext.Provider
@@ -233,6 +204,9 @@ export const AuthProvider = ({ children }) => {
         signIn,
         signUp,
         signOut,
+        showCategory,
+        addCategory,
+        addRecord_,
 
         isLoggedIn,
         isLoading,

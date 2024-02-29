@@ -114,17 +114,6 @@ export default function Profile() {
             </div>
           </div>
           <div className="flex  items-center justify-end gap-20">
-            {/* <Link href="/dashboard">
-              <div className="mt-20 bg-blue-500 p-2 w-fit text-white rounded-lg">
-                Back to Dashboard
-              </div>
-            </Link>
-            <Link href="/">
-              <div className="mt-20 bg-blue-500 p-2 w-fit text-white rounded-lg">
-                Back to Records
-              </div>
-            </Link> */}
-
             <div
               onClick={signOut}
               className=" mt-20 cursor-pointer bg-red-500 p-2 text-white rounded-lg"

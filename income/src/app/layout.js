@@ -17,6 +17,9 @@ export default function RootLayout({ children }) {
   const [IconColor, setIconColor] = useState("");
   return (
     <html lang="en">
+      <head>
+        <title>Geld Finance</title>
+      </head>
       <body className={inter.className}>
         <Context.Provider
           value={{
@@ -30,6 +33,18 @@ export default function RootLayout({ children }) {
             setSelectedIcon,
           }}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <AuthProvider>{children}</AuthProvider>
           <ToastContainer />
         </Context.Provider>
