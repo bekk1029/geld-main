@@ -12,13 +12,13 @@ import { useRouter } from "next/navigation";
 export const Context_ = createContext();
 
 export default function Records() {
-  const { isLoggedIn } = useAuth();
-  const router = useRouter();
-  const { isOpenRecord, isOpenCategory } = useContext(Context);
-  const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedType, setSelectedType] = useState("All");
-  const [amountPrice, setAmountPrice] = useState("0");
+  // const { isLoggedIn } = useAuth();
+  // const router = useRouter();
+  // const { isOpenRecord, isOpenCategory } = useContext(Context);
+  // const [search, setSearch] = useState("");
+  // const [selectedCategory, setSelectedCategory] = useState("");
+  // const [selectedType, setSelectedType] = useState("All");
+  // const [amountPrice, setAmountPrice] = useState("0");
 
   // useEffect(() => {
   //   if (!isLoggedIn) router.push("/");
