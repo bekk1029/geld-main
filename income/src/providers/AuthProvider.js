@@ -64,19 +64,28 @@ export const AuthProvider = ({ children }) => {
         password,
       });
 
-      // const { token } = data;
-
-      // localStorage.setItem("token", token);
-
-      setIsLoggedIn(true);
-
-      // setRefresh(refresh + 1);
-
+      toast.success(data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       router.push("/dashboard");
-      // showOn();
     } catch (error) {
-      // toast.error(error.response.data.message);
-      console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } finally {
       setIsLoading(false);
     }

@@ -6,6 +6,8 @@ import { Btn } from "../../components/btn";
 import { useAuth } from "../../providers/AuthProvider";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 export default function Sign() {
   const { signUp } = useAuth();
   const [name, setName] = useState("");
@@ -16,6 +18,7 @@ export default function Sign() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  const router = useRouter();
   return (
     <div className="w-full flex h-screen ">
       <div className="w-1/2 flex justify-center items-center bg-white">
@@ -76,7 +79,7 @@ export default function Sign() {
                 type={showPassword ? "text" : "password"}
                 value={rePassword}
                 onChange={(e) => {
-                  setPassword(e.target.value);
+                  setRePassword(e.target.value);
                 }}
                 className="w-full h-12 p-4 bg-gray-100 rounded-lg border border-gray-300  justify-start items-center flex"
               />
@@ -89,8 +92,8 @@ export default function Sign() {
             </div>
             <div
               onClick={() => {
-                // e.preventDefualt();
-                signUp(email, password, name);
+                signUp(name, email, password);
+                // toast.success("signed up successfully"),
               }}
             >
               <Btn value="Sign up" />
