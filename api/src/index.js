@@ -108,78 +108,78 @@ app.get("/category", async (req, res) => {
   }
 });
 
-// app.post("/records", async (req, res) => {
-//   const { authorization } = req.headers;
+app.post("/records", async (req, res) => {
+  const { authorization } = req.headers;
 
-//   if (!authorization) {
-//     return res.status(401).json({
-//       message: "Unauthorized",
-//     });
-//   }
+  if (!authorization) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
 
-//   try {
-//     const payload = jwt.verify(authorization, "secret-boy");
-//     const { email } = payload;
-//     const {
-//       amount,
-//       date,
-//       isExpense,
-//       selectedCategory,
-//       time,
-//       IconColor,
-//       selectedIcon,
-//     } = req.body;
+  try {
+    const payload = jwt.verify(authorization, "secret-boy");
+    const { email } = payload;
+    const {
+      amount,
+      date,
+      isExpense,
+      selectedCategory,
+      time,
+      IconColor,
+      selectedIcon,
+    } = req.body;
 
-//     await Record.create({
-//       amount: amount,
-//       date: new Date(date),
-//       isExpense: isExpense,
-//       selectedCategory: selectedCategory,
-//       time: time,
-//       IconColor: IconColor,
-//       selectedIcon: selectedIcon,
-//       userEmail: email,
-//     });
+    await Record.create({
+      amount: amount,
+      date: new Date(date),
+      isExpense: isExpense,
+      selectedCategory: selectedCategory,
+      time: time,
+      IconColor: IconColor,
+      selectedIcon: selectedIcon,
+      userEmail: email,
+    });
 
-//     res.json({
-//       message: "Record created",
-//     });
-//   } catch (error) {
-//     return res.status(401).json({
-//       message: "Unauthorized",
-//     });
-//   }
-// });
+    res.json({
+      message: "Record created",
+    });
+  } catch (error) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+});
 
-// app.get("/records", async (req, res) => {
-//   const { authorization } = req.headers;
-//   const { days } = req.query;
+app.get("/records", async (req, res) => {
+  const { authorization } = req.headers;
+  const { days } = req.query;
 
-//   if (!authorization) {
-//     return res.status(401).json({
-//       message: "Unauthorized",
-//     });
-//   }
+  if (!authorization) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
 
-//   try {
-//     const payload = jwt.verify(authorization, "secret-boy");
-//     const { email } = payload;
-//     const filterDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * days);
-//     console.log(days, filterDate);
-//     const usersRecords = await Record.find({ userEmail: email });
-//     const filterData = usersRecords.filter((record) => {
-//       return record.date > filterDate;
-//     });
+  try {
+    const payload = jwt.verify(authorization, "secret-boy");
+    const { email } = payload;
+    const filterDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * days);
+    console.log(days, filterDate);
+    const usersRecords = await Record.find({ userEmail: email });
+    const filterData = usersRecords.filter((record) => {
+      return record.date > filterDate;
+    });
 
-//     res.json({
-//       records: filterData,
-//     });
-//   } catch (error) {
-//     return res.status(401).json({
-//       message: "Unauthorized",
-//     });
-//   }
-// });
+    res.json({
+      records: filterData,
+    });
+  } catch (error) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+});
 
 const port = 3005;
 
