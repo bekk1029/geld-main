@@ -1,20 +1,16 @@
 const mongoose = require("mongoose");
 
-const connect = async () => {
+const connectDatabase = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://Saruul:Pi12739@cluster0.xdbi0wh.mongodb.net/geld",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
+      "mongodb+srv://morgild:Bodybodi1220@cluster1.1tebnln.mongodb.net/ExpenseTracker?retryWrites=true&w=majority"
     );
-    console.log("DataBase connected");
+    console.log("Successfully Connected");
   } catch (error) {
-    console.log("Database connected failed");
+    console.log(error);
   }
 };
 
 module.exports = {
-  connect,
+  connectDatabase,
 };
